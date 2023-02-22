@@ -4,4 +4,7 @@ const contactsPlan = Joi.object({
   email: Joi.string().required(),
   phone: Joi.string().required(),
 });
-module.exports = contactsPlan;
+const updateFavoriteContact = Joi.object({
+  favorite: Joi.bool().required(),
+});
+module.exports = { contactsPlan, updateFavoriteContact };
