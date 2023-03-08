@@ -27,8 +27,6 @@ const getAllContacts = async (req, res, next) => {
         data: { result: falseContacts },
       });
     }
-    console.log("favorite", favorite);
-    console.log("contacts", contacts);
     return res.json({
       status: "success",
       code: 200,
