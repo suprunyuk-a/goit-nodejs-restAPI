@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 const { modelUser } = require("../../models");
-const { loginSchema } = require("../../plan");
+const { loginSchema } = require("../../schema");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { SECRET_KEY } = process.env;
@@ -18,6 +18,10 @@ const login = async (req, res, next) => {
     const passCompare = bcrypt.compareSync(password, user.password);
     if (!passCompare) {
       throw createError(401, "Password is wrong");
+    }
+
+    if (!user.verify) {
+      throw createError(400, "Email not verify");
     }
     const payload = { id: user._id };
     const token = jwt.sign(payload, SECRET_KEY, { expiresIn: "1h" });
